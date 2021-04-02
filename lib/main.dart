@@ -26,6 +26,93 @@ class _MyHomePageState extends State<_MyHomePage> {
   var n = 0;
   var title = 'Day';
 
+  @override
+  Widget build(BuildContext context) {
+    final list = [_dayData, _weekData, _monthData, _quarterData, _yearData];
+
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Syncfusion Flutter chart'),
+        ),
+        body:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Text(title,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400), ),
+          //Initialize the chart widget
+          SfCartesianChart(
+            primaryXAxis: DateTimeAxis(
+              intervalType: DateTimeIntervalType.auto,
+            ),
+            // Chart title
+            title: ChartTitle(
+              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+            ),
+            // Enable legend
+            legend: Legend(isVisible: false),
+            // Enable tooltip
+            tooltipBehavior: TooltipBehavior(enable: true),
+            series: <ChartSeries<BarGraphInterval, DateTime>>[
+              ColumnSeries<BarGraphInterval, DateTime>(
+                animationDuration: 2000,
+                dataSource: list[n],
+                pointColorMapper: (_, __) => Colors.amber,
+                xValueMapper: (BarGraphInterval sales, i) => sales.date,
+                yValueMapper: (BarGraphInterval sales, i) => sales.amount,
+                name: '',
+                width: 0.6,
+                spacing: 0.1,
+              ),
+            ],
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            ElevatedButton(
+              child: Text('Day'),
+              onPressed: () {
+                setState(() {
+                  n = 0;
+                  title = 'Day';
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text('Week'),
+              onPressed: () {
+                setState(() {
+                  n = 1;
+                  title = 'Week';
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text('Week'),
+              onPressed: () {
+                setState(() {
+                  n = 2;
+                  title = 'Week';
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text('Quarter'),
+              onPressed: () {
+                setState(() {
+                  n = 3;
+                  title = 'Quarter';
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text('Year'),
+              onPressed: () {
+                setState(() {
+                  n = 4;
+                  title = 'Year';
+                });
+              },
+            ),
+          ]),
+        ]));
+  }
+
   List<BarGraphInterval> _dayData = [
     BarGraphInterval(date: DateTime(2021, 4, 1, 0), amount: 999),
     BarGraphInterval(date: DateTime(2021, 4, 1, 1), amount: 998),
@@ -117,93 +204,6 @@ class _MyHomePageState extends State<_MyHomePage> {
     BarGraphInterval(date: DateTime(2021, 11, 1), amount: 997),
     BarGraphInterval(date: DateTime(2021, 12, 1), amount: 996),
   ];
-
-  @override
-  Widget build(BuildContext context) {
-    final list = [_dayData, _weekData, _monthData, _quarterData, _yearData];
-
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text('Syncfusion Flutter chart'),
-        ),
-        body:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Text(title,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400), ),
-          //Initialize the chart widget
-          SfCartesianChart(
-            primaryXAxis: DateTimeAxis(
-              intervalType: DateTimeIntervalType.auto,
-            ),
-            // Chart title
-            title: ChartTitle(
-              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
-            ),
-            // Enable legend
-            legend: Legend(isVisible: false),
-            // Enable tooltip
-            tooltipBehavior: TooltipBehavior(enable: true),
-            series: <ChartSeries<BarGraphInterval, DateTime>>[
-              ColumnSeries<BarGraphInterval, DateTime>(
-                animationDuration: 2000,
-                dataSource: list[n],
-                pointColorMapper: (_, __) => Colors.amber,
-                xValueMapper: (BarGraphInterval sales, i) => sales.date,
-                yValueMapper: (BarGraphInterval sales, i) => sales.amount,
-                name: '',
-                width: 0.6,
-                spacing: 0.1,
-              ),
-            ],
-          ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            ElevatedButton(
-              child: Text('Day'),
-              onPressed: () {
-                setState(() {
-                  n = 0;
-                  title = 'Day';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Week'),
-              onPressed: () {
-                setState(() {
-                  n = 1;
-                  title = 'Week';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Month'),
-              onPressed: () {
-                setState(() {
-                  n = 2;
-                  title = 'Month';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Quarter'),
-              onPressed: () {
-                setState(() {
-                  n = 3;
-                  title = 'Quarter';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Year'),
-              onPressed: () {
-                setState(() {
-                  n = 4;
-                  title = 'Year';
-                });
-              },
-            ),
-          ]),
-        ]));
-  }
 }
 
 class BarGraphInterval {
