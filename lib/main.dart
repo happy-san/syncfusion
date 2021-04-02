@@ -63,6 +63,40 @@ class _MyHomePageState extends State<_MyHomePage> {
     BarGraphInterval(date: DateTime(2021, 4, 28), amount: 997),
   ];
 
+  List<BarGraphInterval> _monthData = [
+    BarGraphInterval(date: DateTime(2021, 3, 1), amount: 999),
+    BarGraphInterval(date: DateTime(2021, 3, 2), amount: 998),
+    BarGraphInterval(date: DateTime(2021, 3, 3), amount: 997),
+    BarGraphInterval(date: DateTime(2021, 3, 4), amount: 996),
+    BarGraphInterval(date: DateTime(2021, 3, 5), amount: 995),
+    BarGraphInterval(date: DateTime(2021, 3, 6), amount: 994),
+    BarGraphInterval(date: DateTime(2021, 3, 7), amount: 993),
+    BarGraphInterval(date: DateTime(2021, 3, 8), amount: 992),
+    BarGraphInterval(date: DateTime(2021, 3, 9), amount: 991),
+    BarGraphInterval(date: DateTime(2021, 3, 10), amount: 990),
+    BarGraphInterval(date: DateTime(2021, 3, 11), amount: 989),
+    BarGraphInterval(date: DateTime(2021, 3, 12), amount: 988),
+    BarGraphInterval(date: DateTime(2021, 3, 13), amount: 987),
+    BarGraphInterval(date: DateTime(2021, 3, 14), amount: 986),
+    BarGraphInterval(date: DateTime(2021, 3, 15), amount: 985),
+    BarGraphInterval(date: DateTime(2021, 3, 16), amount: 984),
+    BarGraphInterval(date: DateTime(2021, 3, 17), amount: 983),
+    BarGraphInterval(date: DateTime(2021, 3, 18), amount: 982),
+    BarGraphInterval(date: DateTime(2021, 3, 19), amount: 981),
+    BarGraphInterval(date: DateTime(2021, 3, 20), amount: 980),
+    BarGraphInterval(date: DateTime(2021, 3, 21), amount: 979),
+    BarGraphInterval(date: DateTime(2021, 3, 22), amount: 978),
+    BarGraphInterval(date: DateTime(2021, 3, 23), amount: 977),
+    BarGraphInterval(date: DateTime(2021, 3, 24), amount: 976),
+    BarGraphInterval(date: DateTime(2021, 3, 25), amount: 975),
+    BarGraphInterval(date: DateTime(2021, 3, 26), amount: 974),
+    BarGraphInterval(date: DateTime(2021, 3, 27), amount: 973),
+    BarGraphInterval(date: DateTime(2021, 3, 28), amount: 972),
+    BarGraphInterval(date: DateTime(2021, 3, 29), amount: 971),
+    BarGraphInterval(date: DateTime(2021, 3, 30), amount: 970),
+    BarGraphInterval(date: DateTime(2021, 3, 31), amount: 969),
+  ];
+
   List<BarGraphInterval> _quarterData = [
     BarGraphInterval(date: DateTime(2021, 1, 1), amount: 999),
     BarGraphInterval(date: DateTime(2021, 2, 1), amount: 998),
@@ -86,7 +120,7 @@ class _MyHomePageState extends State<_MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final list = [_dayData, _weekData, _quarterData, _yearData];
+    final list = [_dayData, _weekData, _monthData, _quarterData, _yearData];
 
     return Scaffold(
         appBar: AppBar(
@@ -141,10 +175,19 @@ class _MyHomePageState extends State<_MyHomePage> {
               },
             ),
             ElevatedButton(
-              child: Text('Quarter'),
+              child: Text('Month'),
               onPressed: () {
                 setState(() {
                   n = 2;
+                  title = 'Month';
+                });
+              },
+            ),
+            ElevatedButton(
+              child: Text('Quarter'),
+              onPressed: () {
+                setState(() {
+                  n = 3;
                   title = 'Quarter';
                 });
               },
@@ -153,7 +196,7 @@ class _MyHomePageState extends State<_MyHomePage> {
               child: Text('Year'),
               onPressed: () {
                 setState(() {
-                  n = 3;
+                  n = 4;
                   title = 'Year';
                 });
               },
