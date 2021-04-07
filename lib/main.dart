@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 void main() {
@@ -31,16 +32,21 @@ class _MyHomePageState extends State<_MyHomePage> {
     final list = [_dayData, _weekData, _monthData, _quarterData, _yearData];
 
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Syncfusion Flutter chart'),
-        ),
-        body:
-            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Text(title,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400), ),
+      appBar: AppBar(
+        title: const Text('Syncfusion Flutter chart'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Text(
+            title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+          ),
           //Initialize the chart widget
           SfCartesianChart(
             primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
+              dateFormat: n == 3 || n == 4 ? DateFormat.MMM() : null,
             ),
             // Chart title
             title: ChartTitle(
@@ -63,54 +69,59 @@ class _MyHomePageState extends State<_MyHomePage> {
               ),
             ],
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            ElevatedButton(
-              child: Text('Day'),
-              onPressed: () {
-                setState(() {
-                  n = 0;
-                  title = 'Day';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Week'),
-              onPressed: () {
-                setState(() {
-                  n = 1;
-                  title = 'Week';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Week'),
-              onPressed: () {
-                setState(() {
-                  n = 2;
-                  title = 'Week';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Quarter'),
-              onPressed: () {
-                setState(() {
-                  n = 3;
-                  title = 'Quarter';
-                });
-              },
-            ),
-            ElevatedButton(
-              child: Text('Year'),
-              onPressed: () {
-                setState(() {
-                  n = 4;
-                  title = 'Year';
-                });
-              },
-            ),
-          ]),
-        ]));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                child: Text('Day'),
+                onPressed: () {
+                  setState(() {
+                    n = 0;
+                    title = 'Day';
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: Text('Week'),
+                onPressed: () {
+                  setState(() {
+                    n = 1;
+                    title = 'Week';
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: Text('Week'),
+                onPressed: () {
+                  setState(() {
+                    n = 2;
+                    title = 'Week';
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: Text('Quarter'),
+                onPressed: () {
+                  setState(() {
+                    n = 3;
+                    title = 'Quarter';
+                  });
+                },
+              ),
+              ElevatedButton(
+                child: Text('Year'),
+                onPressed: () {
+                  setState(() {
+                    n = 4;
+                    title = 'Year';
+                  });
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   List<BarGraphInterval> _dayData = [
