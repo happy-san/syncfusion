@@ -48,117 +48,146 @@ class _MyHomePageState extends State<_MyHomePage> {
       appBar: AppBar(
         title: const Text('Syncfusion Flutter chart'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                flex: 8,
-                child: Text(
-                  title,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                  textAlign: TextAlign.center,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              height: 80,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  flex: 8,
+                  child: Text(
+                    title,
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: TextButton(
-                    child: Text(
-                      showAllData ? 'Single interval' : 'All',
-                      textAlign: TextAlign.center,
-                    ),
-                    onPressed: () =>
-                        setState(() => showAllData = !showAllData)),
-              ),
-            ],
-          ),
-          //Initialize the chart widget
-          SfCartesianChart(
-            primaryXAxis: DateTimeAxis(
-              intervalType: DateTimeIntervalType.auto,
-              dateFormat: () {
-                if (n >= 3) {
-                  return DateFormat.MMM();
-                } else if (n >= 1) {
-                  return DateFormat('d MMM');
-                } else {
-                  return null;
-                }
-              }(),
+                Expanded(
+                  flex: 2,
+                  child: TextButton(
+                      child: Text(
+                        showAllData ? 'Single interval' : 'All',
+                        textAlign: TextAlign.center,
+                      ),
+                      onPressed: () =>
+                          setState(() => showAllData = !showAllData)),
+                ),
+              ],
             ),
-            // Chart title
-            title: ChartTitle(
-              textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
+            SizedBox(
+              height: 80,
             ),
-            // Enable legend
-            legend: Legend(isVisible: false),
-            // Enable tooltip
-            tooltipBehavior: TooltipBehavior(enable: true),
-            series: <ChartSeries<BarGraphInterval, DateTime>>[
-              ColumnSeries<BarGraphInterval, DateTime>(
-                animationDuration: 2000,
-                dataSource: list[n],
-                pointColorMapper: (_, __) => Colors.amber,
-                xValueMapper: (BarGraphInterval sales, i) => sales.date,
-                yValueMapper: (BarGraphInterval sales, i) => sales.amount,
-                name: '',
-                width: 0.6,
-                spacing: 0.1,
+            //Initialize the chart widget
+            SfCartesianChart(
+              primaryXAxis: DateTimeAxis(
+                intervalType: DateTimeIntervalType.auto,
+                dateFormat: () {
+                  if (n >= 3) {
+                    return DateFormat.MMM();
+                  } else if (n >= 1) {
+                    return DateFormat('d MMM');
+                  } else {
+                    return null;
+                  }
+                }(),
+                rangePadding: n == 3 || n == 4
+                    ? ChartRangePadding.normal
+                    : ChartRangePadding.auto
               ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(
-                child: Text('Day'),
-                onPressed: () {
-                  setState(() {
-                    n = 0;
-                    title = 'Day';
-                  });
-                },
+              // Chart title
+              title: ChartTitle(
+                textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
               ),
-              ElevatedButton(
-                child: Text('Week'),
-                onPressed: () {
-                  setState(() {
-                    n = 1;
-                    title = 'Week';
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text('Month'),
-                onPressed: () {
-                  setState(() {
-                    n = 2;
-                    title = 'Month';
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text('Quarter'),
-                onPressed: () {
-                  setState(() {
-                    n = 3;
-                    title = 'Quarter';
-                  });
-                },
-              ),
-              ElevatedButton(
-                child: Text('Year'),
-                onPressed: () {
-                  setState(() {
-                    n = 4;
-                    title = 'Year';
-                  });
-                },
-              ),
-            ],
-          ),
-        ],
+              // Enable legend
+              legend: Legend(isVisible: false),
+              // Enable tooltip
+              tooltipBehavior: TooltipBehavior(enable: true),
+              series: <ChartSeries<BarGraphInterval, DateTime>>[
+                ColumnSeries<BarGraphInterval, DateTime>(
+                  animationDuration: 2000,
+                  dataSource: list[n],
+                  pointColorMapper: (_, __) => Colors.amber,
+                  xValueMapper: (BarGraphInterval sales, i) => sales.date,
+                  yValueMapper: (BarGraphInterval sales, i) => sales.amount,
+                  name: '',
+                  width: 0.6,
+                  spacing: 0.1,
+                ),
+              ],
+              trackballBehavior: TrackballBehavior(
+                  // Enables the trackball
+                  enable: true,
+                  tooltipSettings:
+                      InteractiveTooltip(enable: true, color: Colors.black)),
+            ),
+            SizedBox(
+              height: 80,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                  child: Text('Day'),
+                  onPressed: () {
+                    setState(() {
+                      n = 0;
+                      title = 'Day';
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: Text('Week'),
+                  onPressed: () {
+                    setState(() {
+                      n = 1;
+                      title = 'Week';
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: Text('Month'),
+                  onPressed: () {
+                    setState(() {
+                      n = 2;
+                      title = 'Month';
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: Text('Quarter'),
+                  onPressed: () {
+                    setState(() {
+                      n = 3;
+                      title = 'Quarter';
+                    });
+                  },
+                ),
+                ElevatedButton(
+                  child: Text('Year'),
+                  onPressed: () {
+                    setState(() {
+                      n = 4;
+                      title = 'Year';
+                    });
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 80,
+            ),
+            Container(
+              height: 80,
+              width: double.infinity,
+              color: Colors.blue,
+              margin: const EdgeInsets.all(8),
+              alignment: Alignment.bottomCenter,
+              child: Text('Can\'t reach here by scrolling through bar graph!'),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -247,6 +276,7 @@ final _quarterData = [
   BarGraphInterval(date: DateTime(2021, 2, 1), amount: 998),
   BarGraphInterval(date: DateTime(2021, 3, 1), amount: 997),
 ];
+
 final _yearData = [
   BarGraphInterval(date: DateTime(2021, 1, 1), amount: 999),
   BarGraphInterval(date: DateTime(2021, 2, 1), amount: 998),
