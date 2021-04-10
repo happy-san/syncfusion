@@ -77,7 +77,15 @@ class _MyHomePageState extends State<_MyHomePage> {
           SfCartesianChart(
             primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
-              dateFormat: n == 3 || n == 4 ? DateFormat.MMM() : null,
+              dateFormat: () {
+                if (n >= 3) {
+                  return DateFormat.MMM();
+                } else if (n >= 1) {
+                  return DateFormat('d MMM');
+                } else {
+                  return null;
+                }
+              }(),
             ),
             // Chart title
             title: ChartTitle(
