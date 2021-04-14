@@ -17,7 +17,7 @@ class _ChartApp extends StatelessWidget {
 }
 
 class _MyHomePage extends StatefulWidget {
-  _MyHomePage({Key key}) : super(key: key);
+  _MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -82,20 +82,19 @@ class _MyHomePageState extends State<_MyHomePage> {
             //Initialize the chart widget
             SfCartesianChart(
               primaryXAxis: DateTimeAxis(
-                intervalType: DateTimeIntervalType.auto,
-                dateFormat: () {
-                  if (n >= 3) {
-                    return DateFormat.MMM();
-                  } else if (n >= 1) {
-                    return DateFormat('d MMM');
-                  } else {
-                    return null;
-                  }
-                }(),
-                rangePadding: n == 3 || n == 4
-                    ? ChartRangePadding.normal
-                    : ChartRangePadding.auto
-              ),
+                  intervalType: DateTimeIntervalType.auto,
+                  dateFormat: () {
+                    if (n >= 3) {
+                      return DateFormat.MMM();
+                    } else if (n >= 1) {
+                      return DateFormat('d MMM');
+                    } else {
+                      return null;
+                    }
+                  }(),
+                  rangePadding: n == 3 || n == 4
+                      ? ChartRangePadding.normal
+                      : ChartRangePadding.auto),
               // Chart title
               title: ChartTitle(
                 textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
@@ -197,7 +196,7 @@ class BarGraphInterval {
   DateTime date;
   double amount;
 
-  BarGraphInterval({this.date, this.amount});
+  BarGraphInterval({required this.date, required this.amount});
 }
 
 final _dayData = [
