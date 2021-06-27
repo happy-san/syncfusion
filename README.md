@@ -1,16 +1,5 @@
 # syncfusion_cartesian_chart
 
-A new Flutter project.
+Showcase of syncfusion's bar graph.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="assets/Screenshot_1624815471.png" alt="Days" width="250" height="500"> <img src="assets/Screenshot_1624815524.png" alt="Single Interval" width="250" height="500"> <img src="assets/Screenshot_1624815555.png" alt="Week" width="250" height="500"> <img src="assets/Screenshot_1624815545.png" alt="Quarter" width="250" height="500"> 
