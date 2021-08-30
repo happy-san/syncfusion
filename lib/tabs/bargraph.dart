@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../widgets/headline_text.dart';
+
 class Bargraph extends StatefulWidget {
   Bargraph({Key? key}) : super(key: key);
 
@@ -9,31 +11,29 @@ class Bargraph extends StatefulWidget {
   _BargraphState createState() => _BargraphState();
 }
 
-class _BargraphState extends State<Bargraph>
-    with AutomaticKeepAliveClientMixin {
+class _BargraphState extends State<Bargraph> {
   var exampleNumber = 0,
       title = 'Day',
       showAllData = true,
       intervalType = DateTimeIntervalType.hours;
 
+  final allData = [
+    _dayData,
+    _weekData,
+    _monthData,
+    _quarterData,
+    _yearData,
+  ];
+  final singleData = [
+    _daySingleData,
+    _weekSingleData,
+    _monthSingleData,
+    _quarterSingleData,
+    _yearSingleData,
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final list = showAllData
-        ? [
-            _dayData,
-            _weekData,
-            _monthData,
-            _quarterData,
-            _yearData,
-          ]
-        : [
-            _daySingleData,
-            _weekSingleData,
-            _monthSingleData,
-            _quarterSingleData,
-            _yearSingleData,
-          ];
-
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -41,11 +41,7 @@ class _BargraphState extends State<Bargraph>
           children: [
             Expanded(
               flex: 8,
-              child: Text(
-                title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-                textAlign: TextAlign.center,
-              ),
+              child: HeadlineText(title),
             ),
             Expanded(
               flex: 2,
@@ -61,19 +57,22 @@ class _BargraphState extends State<Bargraph>
         //Initialize the chart widget
         SfCartesianChart(
           primaryXAxis: DateTimeAxis(
-              intervalType: intervalType,
-              dateFormat: () {
-                if (exampleNumber >= 3) {
-                  return DateFormat.MMM();
-                } else if (exampleNumber >= 1) {
-                  return DateFormat('d MMM');
-                } else {
-                  return null;
-                }
-              }(),
-              rangePadding: exampleNumber == 3 || exampleNumber == 4
-                  ? ChartRangePadding.normal
-                  : ChartRangePadding.auto),
+            intervalType: intervalType,
+            dateFormat: () {
+              if (exampleNumber >= 3) {
+                return DateFormat.MMM();
+              } else if (exampleNumber >= 1) {
+                return DateFormat('d MMM');
+              } else {
+                return null;
+              }
+            }(),
+            rangePadding: exampleNumber >= 3
+                ? ChartRangePadding.normal
+                : ChartRangePadding.auto,
+            edgeLabelPlacement: EdgeLabelPlacement.shift,
+            plotOffset: 8,
+          ),
           // Chart title
           title: ChartTitle(
             textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
@@ -85,7 +84,9 @@ class _BargraphState extends State<Bargraph>
           series: <ChartSeries<BarGraphInterval, DateTime>>[
             ColumnSeries<BarGraphInterval, DateTime>(
               animationDuration: 2000,
-              dataSource: list[exampleNumber],
+              dataSource: showAllData
+                  ? allData[exampleNumber]
+                  : singleData[exampleNumber],
               pointColorMapper: (_, __) => Colors.amber,
               xValueMapper: (BarGraphInterval sales, i) => sales.date,
               yValueMapper: (BarGraphInterval sales, i) => sales.amount,
@@ -97,6 +98,7 @@ class _BargraphState extends State<Bargraph>
           trackballBehavior: TrackballBehavior(
             // Enables the trackball
             enable: true,
+            activationMode: ActivationMode.singleTap,
             tooltipSettings:
                 InteractiveTooltip(enable: true, color: Colors.black),
           ),
@@ -159,9 +161,6 @@ class _BargraphState extends State<Bargraph>
       ],
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
 
 class BarGraphInterval {

@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../widgets/headline_text.dart';
+
 class Linegraph extends StatefulWidget {
   const Linegraph({Key? key}) : super(key: key);
 
@@ -22,16 +24,13 @@ class _LinegraphState extends State<Linegraph> {
     LineGraphInterval(pow(2, 15).toInt(), 1362.000377827),
     LineGraphInterval(pow(2, 5).toInt(), 1.543242794)
   ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
-          textAlign: TextAlign.center,
-        ),
+        HeadlineText(title),
 
         //Initialize the chart widget
         SfCartesianChart(
@@ -40,7 +39,7 @@ class _LinegraphState extends State<Linegraph> {
             textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.w400),
           ),
           primaryXAxis:
-              NumericAxis(title: AxisTitle(text: 'Runtime Duration(us)')),
+              NumericAxis(title: AxisTitle(text: 'Runtime Duration(μs)')),
           primaryYAxis: NumericAxis(
             title: AxisTitle(text: 'Repeat Count'),
           ),
@@ -138,7 +137,7 @@ Widget _trackballBuilder(BuildContext _, TrackballDetails trackballDetails) {
     ),
     alignment: Alignment.center,
     child: Text(
-      '${(trackballDetails.point?.x as double).toStringAsFixed(5)} us',
+      '${(trackballDetails.point?.x as double).toStringAsFixed(5)} μs',
       style: TextStyle(color: Colors.white),
     ),
   );

@@ -12,8 +12,8 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.bar_chart)),
               Tab(icon: Icon(Icons.trending_up)),
+              Tab(icon: Icon(Icons.bar_chart)),
             ],
           ),
           title: Text('Syncfusion charts'),
@@ -21,9 +21,9 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            Bargraph(),
+            Linegraph(),
             Material(
-              child: Linegraph(),
+              child: Bargraph(),
               color: Colors.lightGreen[50],
             ),
           ],
