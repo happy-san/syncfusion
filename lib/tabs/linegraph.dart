@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/headline_text.dart';
 
@@ -53,6 +54,26 @@ class _LinegraphState extends State<Linegraph> {
             enable: true,
             decimalPlaces: 3,
           ),
+          axisLabelFormatter: (AxisLabelRenderDetails details) {
+            String value = '';
+            // Checked whether the axis labels are from y-axis
+            if (details.axisName == 'primaryYAxis') {
+              if (details.value != 0) {
+                // Used NumberFormat.ScientificPattern method to convert the axis values to
+                // scientific notation.
+                NumberFormat f = NumberFormat.scientificPattern();
+                // setting maximum integer digits as 2 to handle the formatting.
+                f.maximumIntegerDigits = 2;
+                // Formatted the y-axis value using NumberFormat
+                // (Eg: "5000" on converting using this method changes to "5E3").
+                value = f.format(details.value);
+                // Replaced the 'E' with '×10^' as the required notation format.
+                value = value.replaceAll(r'E', ' × 10^');
+              }
+              return ChartAxisLabel(value, details.textStyle);
+            }
+            return ChartAxisLabel(details.text, details.textStyle);
+          },
           series: <ChartSeries>[
             StackedLineSeries<LineGraphInterval, double>(
               animationDuration: 2000,
