@@ -5,17 +5,18 @@ version: 2.1
 
 jobs:
 
-  test:
+  analyze-and-test:
     docker:
       - image: cirrusci/flutter
     steps:
       - checkout
       - run: |
           flutter doctor
+          flutter analyze
           flutter test 
 
 workflows:
   version: 2.1
   ci:
     jobs:
-      - test
+      - analyze-and-test
