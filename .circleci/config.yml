@@ -20,13 +20,14 @@ commands:
 jobs:
   test:
     docker:
-      - image: google/dart:2.13.1
+      - image: cirrusci/flutter
     steps:
       - dependencies:
           shell: "/bin/bash -eo pipefail"
       - run:
           name: Run tests
           command: |
+            flutter doctor
             dart run build_runner build
             flutter test
 
