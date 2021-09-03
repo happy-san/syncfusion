@@ -4,16 +4,20 @@ version: 2.1
 #   codecov: codecov/codecov@1.2.5
 
 jobs:
-  test:
+  init:
     docker:
       - image: cirrusci/flutter
     steps:
       - checkout
       - run: flutter doctor
+
+  test:
+    steps:
       - run: flutter test 
 
 workflows:
   version: 2.1
   ci:
     jobs:
+      - init
       - test
