@@ -7,12 +7,16 @@ void main() {
 }
 
 class _ChartApp extends StatelessWidget {
+  final ThemeData theme = ThemeData();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        accentColor: Colors.amber,
+      theme: theme.copyWith(
+        colorScheme: theme.colorScheme.copyWith(
+          primary: Colors.blue,
+          secondary: Colors.amber,
+        ),
       ),
       home: HomePage(),
     );
