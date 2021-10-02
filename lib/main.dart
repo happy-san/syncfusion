@@ -7,7 +7,7 @@ void main() {
 }
 
 class _ChartApp extends StatelessWidget {
-  final ThemeData theme = ThemeData();
+  final theme = ThemeData();
 
   @override
   Widget build(BuildContext context) {
