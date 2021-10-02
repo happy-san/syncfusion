@@ -11,6 +11,7 @@ jobs:
     steps:
       - checkout
       - run: |
+          dart run build_runner build
           flutter doctor
           flutter analyze
           flutter test 
