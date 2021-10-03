@@ -1,7 +1,7 @@
 version: 2.1
 
-# orbs:
-#   codecov: codecov/codecov@1.2.5
+orbs:
+  codecov: codecov/codecov@3.1.0
 
 jobs:
 
@@ -21,3 +21,7 @@ workflows:
   ci:
     jobs:
       - analyze-and-test
+  upload-to-codecov:
+    jobs:
+      - checkout
+      - codecov/upload
